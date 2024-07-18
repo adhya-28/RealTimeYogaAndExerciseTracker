@@ -1,0 +1,12 @@
+opencv-python
+mediapipe
+numpy
+pyttsx3
+Pillow
+matplotlib
+tk
+scikit-learn
+pandas
+tensorflow
+pandas
+livelossplot
