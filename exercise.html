@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../static/icon.png">
+    <link rel="stylesheet" href="../static/css/image_classification.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"></script>
+    <script src="https://kit.fontawesome.com/a658a7b479.js" crossorigin="anonymous"></script>
+
+    <title>RealTime Exercise and Yoga Tracker</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .container-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .heading {
+            flex-grow: 1;
+            text-align: center;
+            margin: 0;
+        }
+
+        .exercise-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .exercise-card {
+            border: 1px solid #ccc;
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+        }
+
+        .exercise-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        .exercise-card input[type="number"] {
+            width: 50px;
+            margin-bottom: 10px;
+        }
+
+        .exercise-card button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .exercise-card button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container-flex">
+        <a class="navbar-brand" href="/">
+            <img src="./static/imgs/home.png" alt="Home">
+        </a>
+        <h1 class="heading">
+            <i class="fas fa-dove"></i>&nbsp; Start <span> &nbsp;Exercise </span>
+        </h1>
+    </div>
+
+    <div class="exercise-container">
+        <div class="exercise-card" id="left-leg-rise">
+            <img src="./static/imgs/exercise_images/leftlegrise.png" alt="Left Leg Rise">
+            <h2>Left Leg Rise</h2>
+            <label for="repetitions-left-leg-rise">Enter Repetitions:</label>
+            <input type="number" id="repetitions-left-leg-rise" min="1" value="3">
+            <button onclick="startExercise('Left Leg Rise')">Start Exercise</button>
+        </div>
+
+        <div class="exercise-card" id="walking-jog">
+            <img src="./static/imgs/exercise_images/walking-jog.png" alt="Walking Jog">
+            <h2>Walking Jogging</h2>
+            <label for="repetitions-walking-jog">Enter Repetitions:</label>
+            <input type="number" id="repetitions-walking-jog" min="1" value="3">
+            <button onclick="startExercise('Walking Jog')">Start Exercise</button>
+        </div>
+
+        <div class="exercise-card" id="lunge">
+            <img src="./static/imgs/exercise_images/lunge.png" alt="Lunge">
+            <h2>Lunge</h2>
+            <label for="repetitions-lunge">Enter Repetitions:</label>
+            <input type="number" id="repetitions-lunge" min="1" value="3">
+            <button onclick="startExercise('Lunge')">Start Exercise</button>
+        </div>
+
+        <div class="exercise-card" id="jumping-jack">
+            <img src="./static/imgs/exercise_images/jumpingjack.jpg" alt="Jumping Jacks">
+            <h2>Jumping Jacks</h2>
+            <label for="repetitions-jumping-jacks">Enter Repetitions:</label>
+            <input type="number" id="repetitions-jumping-jacks" min="1" value="3">
+            <button onclick="startExercise('Jumping Jacks')">Start Exercise</button>
+        </div>
+
+        <div class="exercise-card" id="squat">
+            <img src="./static/imgs/exercise_images/squat.png" alt="Squat">
+            <h2>Squat</h2>
+            <label for="repetitions-squat">Enter Repetitions:</label>
+            <input type="number" id="repetitions-squat" min="1" value="3">
+            <button onclick="startExercise('Squat')">Start Exercise</button>
+        </div>
+
+        <div class="exercise-card" id="plank">
+            <img src="./static/imgs/exercise_images/plank.png" alt="Plank">
+            <h2>Plank</h2>
+            <label for="repetitions-plank">Enter Repetitions:</label>
+            <input type="number" id="repetitions-plank" min="1" value="3">
+            <button onclick="startExercise('Plank')">Start Exercise</button>
+        </div>
+
+        <div class="exercise-card" id="push_up">
+            <img src="./static/imgs/exercise_images/pushup.png" alt="Push-Up">
+            <h2>Push-Up</h2>
+            <label for="repetitions-push-up">Enter Repetitions:</label>
+            <input type="number" id="repetitions-push-up" min="1" value="3">
+            <button onclick="startExercise('Push-Up')">Start Exercise</button>
+        </div>
+
+        <div class="exercise-card" id="Crunches">
+            <img src="./static/imgs/exercise_images/crunches.png" alt="Crunches">
+            <h2>Crunches</h2>
+            <label for="repetitions-crunches">Enter Repetitions:</label>
+            <input type="number" id="repetitions-crunches" min="1" value="3">
+            <button onclick="startExercise('Crunches')">Start Exercise</button>
+        </div>
+
+        <div class="exercise-card" id="Triceps Dip">
+            <img src="./static/imgs/exercise_images/tricepdip.png" alt="Triceps Dip">
+            <h2>Triceps Dip</h2>
+            <label for="repetitions-triceps-dip">Enter Repetitions:</label>
+            <input type="number" id="repetitions-triceps-dip" min="1" value="3">
+            <button onclick="startExercise('Triceps Dip')">Start Exercise</button>
+        </div>
+    </div>
+
+    <script>
+        function startExercise(exerciseName) {
+
+            // if (currentExercise !== null) {
+            //     // Clean up current exercise if any
+            //     cleanupExercise();
+            // }
+
+            const id = `repetitions-${exerciseName.toLowerCase().replace(/ /g, '-')}`;
+            console.log(`Target ID: ${id}`);
+            const repetitionsElement = document.getElementById(id);
+            if (repetitionsElement === null) {
+                console.error(`Element with ID ${id} not found`);
+                return;
+            }
+            const repetitions = repetitionsElement.value;
+            console.log(`Repetitions: ${repetitions}`);
+
+            const url = 'http://127.0.0.1:5000/start_exercise';
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ exercise_name: exerciseName, repetitions: repetitions })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    alert(data.status);
+                })
+                .catch(error => console.error('Error:', error));
+
+            // currentExercise = exerciseName;
+        }
+        // function cleanupExercise() {
+        //     // Implement any necessary cleanup logic for the current exercise
+        //     console.log(`Cleaning up ${currentExercise}`);
+
+        //     // Example: Stop any ongoing video display or processing
+        //     const videoElement = document.getElementById('video-element'); // Replace with your video element ID
+        //     if (videoElement) {
+        //         videoElement.pause(); // Pause video playback
+        //         videoElement.src = ''; // Clear video source
+        //     }
+
+        //     // Reset input values or perform any other necessary cleanup
+        //     const repetitionsId = `repetitions-${currentExercise.toLowerCase().replace(/ /g, '-')}`;
+        //     const repetitionsInput = document.getElementById(repetitionsId);
+        //     if (repetitionsInput) {
+        //         repetitionsInput.value = '1'; // Reset repetitions input to default value
+        //     }
+
+        //     currentExercise = null;
+        // }
+    </script>
+</body>
+
+</html>
